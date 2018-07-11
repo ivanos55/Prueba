@@ -36,7 +36,6 @@
         }
 
         var etiquetas = ["rojo", "azul", "amarillo", "verde", "morado", "naranja"];
-
         function graficabar() {
 
             var ctx = document.getElementById("myChart");
