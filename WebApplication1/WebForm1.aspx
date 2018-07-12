@@ -23,15 +23,16 @@
             var results = e.result.split(",");
 
             results.forEach(function (element) {
-                array_labels.push(element);
+                if (element != ',' && element != ';') {
+
+                }
             });
 
-            d1 = results[0];
-            d2 = results[1];
-            d3 = results[2];
-            d4 = results[3];
-            d5 = results[4];
-            d6 = results[5];
+            results.forEach(function (elem) {
+                if (elem != ';') {
+                    array_valores.push(elem);
+                }
+            })
 
             graficabar();
 
@@ -46,7 +47,7 @@
                     labels: array_labels,
                     datasets: [{
                         label: '# votos',
-                        data: [d1, d2, d3, d4, d5, d6],
+                        data: array_valores,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',

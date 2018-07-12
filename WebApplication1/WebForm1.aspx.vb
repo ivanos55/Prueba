@@ -6,7 +6,7 @@ Public Class WebForm1
 
 
     Private Sub CB_holaMundo_Callback(source As Object, e As CallbackEventArgs) Handles CB_holaMundo.Callback
-        Dim cadena As String = "10,2,7,19,15,5;verde,cafe,morado,naranja,azul,rojo"
+        Dim cadena As String = "10,2,7,19,15,8,12,5,;,verde,cafe,morado,naranja,azul,rojo"
 
         e.Result = cadena
 
