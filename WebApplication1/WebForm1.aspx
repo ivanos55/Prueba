@@ -13,7 +13,6 @@
         var d1, d2, d3, d4, d5, d6;
         var array_labels = [];
         var array_valores = [];
-        var array_labels = [];
 
         function HazCallback() {
             CB.PerformCallback();
