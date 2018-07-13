@@ -11,51 +11,61 @@
     <script src="charts/Chart.bundle.min.js"></script>
     <script type="text/javascript">
         
-        var dimension1 = [];
-        var dimension1_labels = [];
-        var dimension1_values = [];
+        var puntocoma = [];
+        var puntocoma2 = [];
+        var amper = [];
+        var nombres = [];
+        var valores = [];
+        var nombres2 = [];
+        var valores2 = [];
 
         function HazCallback() {
             CB.PerformCallback();
         }
         function OnCallbackComplete(s, e) {
 
-            dimension1 = e.result.split(";");
+            amper = e.result.split("$DIM$");
+            puntocoma = amper[0].split(";");
+            puntocoma2 = amper[1].split(";");
 
-            dimension1_labels = dimension1[0].split(",");
-            dimension1_values = dimension1[1].split(",");
+            nombres = puntocoma[0].split(",");
+            valores = puntocoma[1].split(",");
 
-            graficabar();
+            nombres2 = puntocoma2[0].split(",");
+            valores2 = puntocoma2[1].split(",");
+
+            graficachart();
 
         }
 
-        function graficabar() {
+        function graficachart() {
 
-            var ctx = document.getElementById("myChart");
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var purple_orange_gradient = ctx.createLinearGradient(0, 0, 0, 600);
+            var blue_gradient = ctx.createLinearGradient(0, 0, 0, 700);
+            purple_orange_gradient.addColorStop(0, 'orange');
+            purple_orange_gradient.addColorStop(1, 'purple');
+
+
             var myChart = new Chart(ctx, {
                 type:'bar',
                 data: {
-                    labels: dimension1_labels,
+                    labels: nombres,
                     datasets: [{
-                        label: '# votos',
-                        data: dimension1_values,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
+                        label: '# de barras',
+                        data: valores,
+                        backgroundColor: purple_orange_gradient,
+                        borderWidth: 2,
+                        hoverBackgroundColor: purple_orange_gradient,
+                        hoverBorderWidth: 2,
+                        hoverBorderColor: 'purple'
+
+                    }, {
+                        label: '# de area',
+                        data: valores,
+                        backgroundColor: blue_gradient,
+                        type: 'line'
+
                     }]
                 },
                 options: {
@@ -65,10 +75,16 @@
                     }
                 }
             });
-
+                        
         }
 
     </script>
+    <style type="text/css">
+        .col-sm {
+            height: 152px;
+            width: 689px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -76,12 +92,10 @@
 
             <a href="javascript:HazCallback()" style="float: left;">Dale!</a>
 
-            <%--<button id="Actualizar" onclick=" actualizarfun">Actualizar</button>--%>
-
             <dx:ASPxCallback ID="CB_holaMundo" runat="server" ClientInstanceName="CB">
                 <ClientSideEvents CallbackComplete="OnCallbackComplete" />
             </dx:ASPxCallback>
-
+            
             <canvas id="myChart"></canvas>
 
         </div>
